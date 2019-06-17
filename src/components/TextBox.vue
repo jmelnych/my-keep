@@ -6,6 +6,7 @@
                @keyup.enter="addTask"
                placeholder="Title...">
         <textarea v-model="newTaskText"
+              id="tb-text-area"
               class="text-box__text"
               placeholder="Text..."
               @keyup.enter="addTask"
@@ -15,6 +16,7 @@
 
 <script>
 import axios from 'axios';
+import BASEURL from '../api';
 
 export default {
   name: 'text-box',
@@ -33,7 +35,7 @@ export default {
           completed: false,
         };
         axios
-          .post('http://localhost:3000/tasks', newTaskObj)
+          .post(`${BASEURL}/tasks`, newTaskObj)
           .then(res => this.$root.$emit('addTaskEvent', res.data));
 
         this.newTaskTitle = '';
