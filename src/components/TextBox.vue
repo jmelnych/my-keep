@@ -24,6 +24,7 @@ export default {
     return {
       newTaskTitle: '',
       newTaskText: '',
+      error: '',
     };
   },
   methods: {
@@ -33,10 +34,14 @@ export default {
           title: this.newTaskTitle,
           text: this.newTaskText,
           completed: false,
+          archived: false,
         };
         axios
           .post(`${BASEURL}/tasks`, newTaskObj)
-          .then(res => this.$root.$emit('addTaskEvent', res.data));
+          .then((res) => {
+            this.$root.$emit('addTaskEvent', res.data);
+          })
+          .catch(err => this.error = err);
 
         this.newTaskTitle = '';
         this.newTaskText = '';
