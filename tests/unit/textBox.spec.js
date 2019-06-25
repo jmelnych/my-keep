@@ -2,7 +2,6 @@ import { mount } from '@vue/test-utils';
 import TextBox from '@/components/TextBox.vue';
 import axios from 'axios';
 import BASEURL from '@/api';
-import MockAdapter from 'axios-mock-adapter';
 
 
 describe('TextBox.vue component', () => {
@@ -17,12 +16,26 @@ describe('TextBox.vue component', () => {
     expect(wrapper.contains('#tb-text-area')).toBe(true);
   });
 
+  it('triggers addTask method on key enter for title field', () => {
+    wrapper.vm.addTask = jest.fn();
+
+    wrapper.find('#tb-input').setValue('some title');
+    wrapper.find('#tb-input').trigger('keyup.enter');
+    expect(wrapper.vm.addTask).toBeCalled();
+  });
+
+  it('triggers addTask method on key enter for text field', () => {
+    wrapper.vm.addTask = jest.fn();
+
+    wrapper.find('#tb-text-area').setValue('some text');
+    wrapper.find('#tb-text-area').trigger('keyup.enter');
+    expect(wrapper.vm.addTask).toBeCalled();
+  });
+
   describe('Async actions in TextBox.vue component', () => {
-    let mockAdapter;
     let mockedTaskObj;
 
     beforeEach(() => {
-      mockAdapter = new MockAdapter(axios);
       mockedTaskObj = {
         title: 'some title',
         text: 'some text',
@@ -34,20 +47,19 @@ describe('TextBox.vue component', () => {
       wrapper.vm.newTaskText = mockedTaskObj.text;
     });
 
-    // it('Should call add task method', () => {
-    //   wrapper.vm.addTask();
-    //   expect(mockAdapter.onPost).toBeCalledWith(`${BASEURL}/tasks`, mockedTaskObj);
-    // });
+    it('Should call axios post method with a certain parameters', () => {
+      jest.spyOn(axios, 'post');
 
-    it('Should return data from response after post', async () => {
-      mockAdapter.onPost(`${BASEURL}/tasks`, mockedTaskObj).reply(200, mockedTaskObj);
-      const response = wrapper.vm.addTask();
+      wrapper.vm.addTask();
+      expect(axios.post).toBeCalledWith(`${BASEURL}/tasks`, mockedTaskObj);
+    });
 
-      setTimeout(() => {
-        console.log(response);
-        expect(response.mockedTaskObj.title).toEqual('some title');
-        expect(response.mockedTaskObj.text).toEqual('some text');
-      }, 0);
+    it('Should return data with object after post in case of successful response', async (done) => {
+      const mockSuccessPromise = jest.fn().mockImplementation(() => Promise.resolve({ data: mockedTaskObj }));
+
+      const data = await mockSuccessPromise();
+      expect(data).toEqual({ data: mockedTaskObj });
+      done();
     });
   });
 });
