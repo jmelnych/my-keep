@@ -54,11 +54,28 @@ describe('TextBox.vue component', () => {
       expect(axios.post).toBeCalledWith(`${BASEURL}/tasks`, mockedTaskObj);
     });
 
-    it('Should return data with object after post in case of successful response', async (done) => {
-      const mockSuccessPromise = jest.fn().mockImplementation(() => Promise.resolve({ data: mockedTaskObj }));
+    it('Should emit event in case of successful axios resolve', (done) => {
+      let somePromise;
+      wrapper.vm.$root.$emit = jest.fn();
+      axios.post = jest.fn().mockImplementation(() => somePromise = Promise.resolve({ data: mockedTaskObj }));
 
-      const data = await mockSuccessPromise();
-      expect(data).toEqual({ data: mockedTaskObj });
+      wrapper.vm.addTask();
+
+      somePromise.finally(() => {
+        expect(wrapper.vm.$root.$emit).toBeCalledWith('addTaskEvent', mockedTaskObj);
+      });
+      done();
+    });
+
+    it('Should set an error in case of reject', (done) => {
+      let somePromise;
+      axios.post = jest.fn().mockImplementation(() => somePromise = Promise.reject(new Error('some error')));
+
+      wrapper.vm.addTask();
+
+      somePromise.finally(() => {
+        expect(wrapper.vm.error).toBe('some error');
+      });
       done();
     });
   });
