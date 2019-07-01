@@ -3,20 +3,8 @@
     {
       "title": "",
       "text": "asfaf\n",
-      "completed": true,
+      "completed": false,
       "id": 8
-    },
-    {
-      "title": "some todo",
-      "text": "hi\n",
-      "completed": false,
-      "id": 9
-    },
-    {
-      "title": "",
-      "text": "dd\n",
-      "completed": false,
-      "id": 10
     }
   ]
 }
