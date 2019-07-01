@@ -1,3 +1,5 @@
+[![Codecov Coverage](https://img.shields.io/codecov/c/github/jmelnich/my-keep/master.svg?style=flat-square)](https://codecov.io/gh/jmelnich/my-keep/)
+
 # testing-vue
 
 ## Project setup
