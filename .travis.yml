@@ -5,5 +5,5 @@ cache:
   directories:
     - node_modules
 script:
-  - npm lint
-  - npm coverage
+  - npm run lint
+  - npm run coverage
