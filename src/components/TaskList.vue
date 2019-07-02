@@ -1,6 +1,6 @@
 <template>
         <ul class="task-list">
-          <task-item
+          <task-item class="item"
                      v-for="task in tasks"
                      v-bind:task="task"
                      v-bind:key="task.id"
@@ -49,6 +49,9 @@ export default {
         .then((res) => {
           this.tasks = [...this.tasks.filter(task => task.id !== id), res.data];
         });
+    },
+    archiveTask() {
+
     },
   },
 };

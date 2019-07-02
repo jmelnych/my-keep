@@ -6,4 +6,4 @@ cache:
     - node_modules
 script:
   - npm lint
-  - npm test
+  - npm coverage
