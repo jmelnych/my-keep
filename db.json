@@ -3,8 +3,29 @@
     {
       "title": "",
       "text": "asfaf\n",
-      "completed": false,
+      "completed": true,
       "id": 8
+    },
+    {
+      "title": "some new title",
+      "text": "",
+      "completed": false,
+      "archived": false,
+      "id": 9
+    },
+    {
+      "title": "some text",
+      "text": "text\n",
+      "completed": false,
+      "archived": false,
+      "id": 10
+    },
+    {
+      "title": "some title",
+      "text": "some text",
+      "completed": false,
+      "archived": false,
+      "id": 11
     }
   ]
 }

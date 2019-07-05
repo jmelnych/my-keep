@@ -8,8 +8,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
-    "watch": "vue-cli-service test:unit --watch",
-    "coverage": "vue-cli-service test:unit  --coverage"
+    "test:watch": "vue-cli-service test:unit --watch",
+    "test:coverage": "vue-cli-service test:unit  --coverage"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
@@ -43,7 +43,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run test"
+      "pre-commit": ""
     }
   }
 }
