@@ -42,12 +42,15 @@ export default {
         .then(() => this.tasks = this.tasks.filter(task => task.id !== id));
     },
     markComplete(id) {
-      const taskToUpdate = this.tasks.filter(task => task.id === id)[0];
+      const taskToUpdate = this.tasks.find(task => task.id === id);
+      if (!taskToUpdate) {
+        return;
+      }
       taskToUpdate.completed = !taskToUpdate.completed;
       axios
         .put(`${BASEURL}/tasks/${id}`, taskToUpdate)
         .then((res) => {
-          this.tasks = [...this.tasks.filter(task => task.id !== id), res.data];
+          this.tasks = this.tasks.map(task => (task.id === id ? res.data : task));
         });
     },
     archiveTask() {
