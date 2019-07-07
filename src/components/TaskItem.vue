@@ -3,13 +3,15 @@
         <div class="task-item__header">
           <div class="task-item__title"> {{ task.title }} </div>
           <font-awesome-icon icon="check" size="lg" class="task-item__icon"
-                             @click="$emit('mark-complete', task.id)"/>
+                             @click="$emit('complete-task', task.id)"/>
         </div>
         <div class="task-item__content">
           <div class="task-item__text"> {{ task.text }} </div>
         </div>
         <div class="task-item__footer">
           <font-awesome-icon icon="pen" class="task-item__icon" />
+            <font-awesome-icon icon="archive" class="task-item__icon"
+                               @click="$emit('archive-task', task.id)"/>
           <font-awesome-icon icon="trash" class="task-item__icon"
                              @click="$emit('remove-task', task.id)"/>
         </div>
@@ -20,12 +22,15 @@
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faPen, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrash, faPen, faCheck, faArchive,
+} from '@fortawesome/free-solid-svg-icons';
 
 
 library.add(faPen);
 library.add(faCheck);
 library.add(faTrash);
+library.add(faArchive);
 
 export default {
   name: 'task-item',
@@ -38,11 +43,13 @@ export default {
 <style lang="scss">
 
   .task-item {
+    $self: &;
     width: 250px;
+      height: 150px;
     background-color: #fff475;
     border-color: #fff475;
     border-radius: 5px;
-    margin: 0.8em;
+    margin: 10px 10px 0 10px;
     padding: 20px;
     text-align: left;
 
@@ -51,9 +58,18 @@ export default {
       transition: .5s ease;
     }
 
-    &__header, &__footer {
+    &__header {
       display: flex;
       justify-content: space-between;
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: flex-end;
+        align-items: center;
+        #{ $self }__icon:not(:last-child) {
+            margin-right: 15px;
+        }
     }
 
     &__title {
@@ -83,14 +99,22 @@ export default {
       margin-bottom: 2.5em;
     }
 
+      &-completed {
+        background-color: #fff8b7;
+
+          #{ $self }__title, #{ $self }__text {
+          text-decoration: line-through;
+        }
+      }
+
+      &-archived {
+          background-color: #d1d1d1;
+          &:hover {
+              background-color: #c5c5c5;
+              transition: visibility 0s linear 0s, opacity 300ms;
+          }
+      }
   }
 
-  .task-item-completed {
-    background-color: #fff8b7;
-
-    .task-item__title, .task-item__text {
-      text-decoration: line-through;
-    }
-  }
 
 </style>

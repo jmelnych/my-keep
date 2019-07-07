@@ -15,8 +15,8 @@ describe('TaskList.vue component', () => {
     });
   });
 
-  it('checks that component has markComplete method', () => {
-    expect(wrapper.vm.markComplete).toBeInstanceOf(Function);
+  it('checks that component has completeTask method', () => {
+    expect(wrapper.vm.completeTask).toBeInstanceOf(Function);
   });
 
   it('checks that component has removeTask method', () => {
@@ -52,6 +52,7 @@ describe('TaskList.vue component', () => {
       mockedTaskObj = {
         id: 1,
         completed: false,
+        archived: false,
       };
     });
 
@@ -65,23 +66,34 @@ describe('TaskList.vue component', () => {
 
     it('should call axios delete method when removeTask called with correct parameters', () => {
       jest.spyOn(axios, 'delete');
+
       wrapper.vm.removeTask(mockedTaskObj.id);
       expect(axios.delete).toBeCalledWith(`${BASEURL}/tasks/${mockedTaskObj.id}`);
     });
 
-    it('should call axios put method when when markComplete called with correct parameters', () => {
+    it('should call axios put method when when completeTask called with correct parameters', () => {
       jest.spyOn(axios, 'put');
-      const expected = { id: 1, completed: true };
+      const expected = { id: 1, completed: true, archived: false };
+
       wrapper.vm.tasks = [mockedTaskObj];
-      wrapper.vm.markComplete(mockedTaskObj.id);
+      wrapper.vm.completeTask(mockedTaskObj.id);
 
       expect(axios.put).toBeCalledWith(`${BASEURL}/tasks/${mockedTaskObj.id}`, expected);
     });
 
-    it(`should not call axios put method when when markComplete 
+    it(`should not call axios put method when when completeTask 
       called with incorrect id parameter`, () => {
-      wrapper.vm.markComplete(42);
+      wrapper.vm.completeTask(42);
       expect(axios.put).not.toBeCalled();
+    });
+
+    it('should call axios put method when when archiveTask called with correct id parameter', () => {
+      jest.spyOn(axios, 'put');
+      const expected = { id: 1, completed: false, archived: true };
+
+      wrapper.vm.tasks = [mockedTaskObj];
+      wrapper.vm.archiveTask(mockedTaskObj.id);
+      expect(axios.put).toBeCalledWith(`${BASEURL}/tasks/${mockedTaskObj.id}`, expected);
     });
   });
 });

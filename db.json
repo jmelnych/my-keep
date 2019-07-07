@@ -1,31 +1,32 @@
 {
   "tasks": [
     {
-      "title": "",
-      "text": "asfaf\n",
-      "completed": false,
-      "id": 8
-    },
-    {
-      "title": "some new title",
-      "text": "",
-      "completed": false,
+      "title": "blah",
+      "text": "fsfs",
+      "completed": true,
       "archived": false,
       "id": 9
     },
     {
-      "title": "some text",
-      "text": "text\n",
-      "completed": false,
+      "title": "some title",
+      "text": "some text",
+      "completed": true,
       "archived": false,
       "id": 10
     },
     {
-      "title": "some title",
-      "text": "some text",
+      "title": "sorting",
+      "text": "sort all tasks accordingly",
       "completed": false,
       "archived": false,
       "id": 11
+    },
+    {
+      "title": "new task",
+      "text": "to arhive\n",
+      "completed": false,
+      "archived": true,
+      "id": 12
     }
   ]
 }
