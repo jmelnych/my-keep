@@ -17,8 +17,6 @@ describe('TaskItem.vue component', () => {
       },
       stubs: ['font-awesome-icon'],
     });
-
-
   });
 
   it('renders a title of an item', () => {

@@ -1,11 +1,12 @@
 <template>
     <div class="content-layout">
         <side-navigation
-                v-on:filter-tasks="filterTasks"
+                v-on:filter-tasks="updateFilterQuery"
+                v-bind:filterQuery="filterQuery"
         ></side-navigation>
         <ul class="task-list">
           <task-item class="item"
-                     v-for="task in tasks"
+                     v-for="task in filteredTasks()"
                      v-bind:task="task"
                      v-bind:key="task.id"
                      v-on:remove-task="removeTask"
@@ -35,7 +36,7 @@ export default {
   data() {
     return {
       tasks: [],
-      query: 'all',
+      filterQuery: 'todo',
     };
   },
   mounted() {
@@ -44,13 +45,21 @@ export default {
       .get(`${BASEURL}/tasks`)
       .then((res) => {
         this.tasks = res.data;
-        this.taskArchived = res.data.filter(task => task.archived);
       });
   },
   methods: {
-    filterTasks(query) {
-      this.query = query;
-      this.tasks = query === 'all' ? this.tasks : this.tasks.filter(task => task.archived);
+    updateFilterQuery(filterQuery) {
+      this.filterQuery = filterQuery;
+    },
+    filteredTasks() {
+      if (this.filterQuery === 'todo') {
+        return this.tasks.filter(task => !task.archived);
+      } if (this.filterQuery === 'archived') {
+        return this.tasks.filter(task => task.archived);
+      } if (this.filterQuery === 'all') {
+        return this.tasks;
+      }
+      return this.tasks;
     },
     removeTask(id) {
       axios
@@ -78,7 +87,7 @@ export default {
       axios
         .put(`${BASEURL}/tasks/${id}`, taskToUpdate)
         .then((res) => {
-          this.tasks = this.tasks.map(task => (task.id === id ? res.data : task)).filter(task => !task.archived);
+          this.tasks = this.tasks.map(task => (task.id === id ? res.data : task));
         });
     },
   },

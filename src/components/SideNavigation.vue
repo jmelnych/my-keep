@@ -1,13 +1,20 @@
 <template>
     <ul class="nav">
-        <li @click="$emit('filter-tasks', 'all')">Your tasks</li>
-        <li @click="$emit('filter-tasks', 'archived')">Archived</li>
+        <li :class="{'nav-active': filterQuery === 'todo'}"
+            @click="$emit('filter-tasks', 'todo')">Current tasks</li>
+        <li :class="{'nav-active': filterQuery === 'archived'}"
+            @click="$emit('filter-tasks', 'archived')">Archived</li>
+        <li :class="{'nav-active': filterQuery === 'all'}"
+            @click="$emit('filter-tasks', 'all')">All tasks</li>
     </ul>
 </template>
 
 <script>
 export default {
   name: 'side-navigation',
+  props: {
+    filterQuery: String,
+  },
 };
 </script>
 
@@ -24,6 +31,10 @@ export default {
         margin: 10px 10px 0 10px;
         padding: 20px;
         height: 100%;
+
+        &-active {
+            font-weight: 700;
+        }
 
         li {
             text-align: left;
