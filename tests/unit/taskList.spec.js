@@ -95,5 +95,42 @@ describe('TaskList.vue component', () => {
       wrapper.vm.archiveTask(mockedTaskObj.id);
       expect(axios.put).toBeCalledWith(`${BASEURL}/tasks/${mockedTaskObj.id}`, expected);
     });
+
+    describe('should render different filtered tasks based on filterQuery', () => {
+      beforeEach(() => {
+        wrapper.vm.tasks = [
+          {
+            id: 1,
+            completed: false,
+            archived: false,
+          },
+          {
+            id: 2,
+            completed: false,
+            archived: false,
+          },
+          {
+            id: 3,
+            completed: false,
+            archived: true,
+          },
+        ];
+      });
+
+      it('should show all but archived tasks', () => {
+        wrapper.vm.filterQuery = 'todo';
+        expect(wrapper.findAll('.item').length).toBe(2);
+      });
+
+      it('should show all archived tasks', () => {
+        wrapper.vm.filterQuery = 'archived';
+        expect(wrapper.findAll('.item').length).toBe(1);
+      });
+
+      it('should show all tasks', () => {
+        wrapper.vm.filterQuery = 'all';
+        expect(wrapper.findAll('.item').length).toBe(3);
+      });
+    });
   });
 });
