@@ -18,10 +18,11 @@ describe('TextBox.vue component', () => {
 
   it('triggers addTask method on key enter for title field', () => {
     wrapper.vm.addTask = jest.fn();
+    wrapper.vm.moveNextInputBox = jest.fn();
 
     wrapper.find('#tb-input').setValue('some title');
     wrapper.find('#tb-input').trigger('keyup.enter');
-    expect(wrapper.vm.addTask).toBeCalled();
+    expect(wrapper.vm.moveNextInputBox).toBeCalled();
   });
 
   it('triggers addTask method on key enter for text field', () => {

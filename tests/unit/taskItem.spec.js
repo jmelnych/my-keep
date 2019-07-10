@@ -15,7 +15,7 @@ describe('TaskItem.vue component', () => {
           archived: false,
         },
       },
-      stubs: ['font-awesome-icon'],
+      stubs: ['font-awesome-icon', 'router-link'],
     });
   });
 

@@ -9,11 +9,14 @@
           <div class="task-item__text"> {{ task.text }} </div>
         </div>
         <div class="task-item__footer">
-          <font-awesome-icon icon="pen" class="task-item__icon" />
-            <font-awesome-icon icon="archive" class="task-item__icon"
+          <router-link :to="{ name: 'edit', params: { id: task.id }}">
+            <font-awesome-icon icon="pen" class="task-item__icon" />
+          </router-link>
+          <font-awesome-icon icon="archive" class="task-item__icon"
                                @click="$emit('archive-task', task.id)"/>
           <font-awesome-icon icon="trash" class="task-item__icon"
                              @click="$emit('remove-task', task.id)"/>
+
         </div>
   </li>
 </template>
@@ -40,7 +43,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 
   .task-item {
     $self: &;
@@ -66,8 +69,8 @@ export default {
     &__footer {
       display: flex;
       justify-content: flex-end;
-        align-items: center;
-        #{ $self }__icon:not(:last-child) {
+      align-items: center;
+        &>*:not(:last-child) {
             margin-right: 15px;
         }
     }

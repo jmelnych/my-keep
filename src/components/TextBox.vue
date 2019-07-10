@@ -1,9 +1,10 @@
 <template>
     <div class="text-box">
         <label class="text-box__label" for="tb-input"></label>
-        <input id="tb-input" type="text" v-model="newTaskTitle"
+        <input id="tb-input" type="text"
+               v-model="newTaskTitle"
                class="text-box__title"
-               @keyup.enter="addTask"
+               @keyup.enter="moveNextInputBox"
                placeholder="Title...">
         <textarea v-model="newTaskText"
               id="tb-text-area"
@@ -28,6 +29,11 @@ export default {
     };
   },
   methods: {
+    moveNextInputBox() {
+      const nextBox = document.getElementById('tb-text-area');
+      nextBox.focus();
+      nextBox.select();
+    },
     addTask() {
       if (this.newTaskTitle.trim() || this.newTaskText.trim()) {
         const newTaskObj = {
@@ -51,7 +57,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     .text-box {
         display: flex;
         flex-direction: column;
