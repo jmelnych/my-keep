@@ -1,36 +1,18 @@
 [![Codecov Coverage](https://img.shields.io/codecov/c/github/jmelnich/my-keep/master.svg?style=flat-square)](https://codecov.io/gh/jmelnich/my-keep/)
-
-# testing-vue
+[![DeepScan grade](https://deepscan.io/api/teams/4661/projects/6416/branches/53175/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=4661&pid=6416&bid=53175)
+# My-keep app
+*Application alike google-keep*
 
 ## Project setup
-```
-npm install
-```
+Make sure you have nodeJS installed.
+Cd into project and run: `npm install`
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Compiles and hot-reloads for development front-end part: `npm start`
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Launch simple json server that keeps data: `npm run server`
 
-### Run your tests
-```
-npm run test
-```
+Compiles and minifies for production: `npm run build`
 
-### Lints and fixes files
-```
-npm run lint
-```
+The rest of the command will be found in package.json file.
+Pre-commit hooks include checking lint and unit tests.
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

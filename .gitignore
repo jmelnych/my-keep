@@ -2,6 +2,7 @@
 node_modules
 /dist
 /coverage
+/plato_report
 
 # local env files
 .env.local

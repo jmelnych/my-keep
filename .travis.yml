@@ -4,6 +4,29 @@ node_js:
 cache:
   directories:
     - node_modules
-script:
-  - npm run lint
+
+stages:
+- lint
+- test
+- analysis
+- deploy
+
+lint:
+  stage: lint
+  script: npm run lint
+
+test:
+  stage: test
+  script: npm test
+
+analysis:
+  stage: analysis
+  script:
   - npm run test:coverage
+  - npm run plato
+
+deploy:
+  provider: aws
+  stage: deploy
+  script: npm run build
+

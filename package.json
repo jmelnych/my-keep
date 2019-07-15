@@ -9,7 +9,8 @@
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
     "test:watch": "vue-cli-service test:unit --watch",
-    "test:coverage": "vue-cli-service test:unit  --coverage"
+    "test:coverage": "vue-cli-service test:unit  --coverage",
+    "plato": "plato -r -d plato_report src/*.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
@@ -38,6 +39,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "husky": "^2.4.1",
     "node-sass": "^4.12.0",
+    "plato": "^1.7.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
   },
