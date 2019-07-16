@@ -16,8 +16,7 @@ describe('TextBox.vue component', () => {
     expect(wrapper.contains('#tb-text-area')).toBe(true);
   });
 
-  it('triggers addTask method on key enter for title field', () => {
-    wrapper.vm.addTask = jest.fn();
+  it('triggers moveNextInputBox method on key enter for title field', () => {
     wrapper.vm.moveNextInputBox = jest.fn();
 
     wrapper.find('#tb-input').setValue('some title');
