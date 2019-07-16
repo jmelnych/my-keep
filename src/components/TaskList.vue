@@ -54,9 +54,9 @@ export default {
     filteredTasks() {
       if (this.filterQuery === 'todo') {
         return this.tasks.filter(task => !task.archived);
-      } if (this.filterQuery === 'archived') {
+      } else if (this.filterQuery === 'archived') {
         return this.tasks.filter(task => task.archived);
-      } if (this.filterQuery === 'all') {
+      } else if (this.filterQuery === 'all') {
         return this.tasks;
       }
       return this.tasks;
