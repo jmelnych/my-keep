@@ -1,40 +1,26 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 stages:
 - lint
 - test
 - analysis
 - build
 - deploy
-
 lint:
   stage: lint
   script: npm run lint
-
 test:
   stage: test
   script: npm test
-
 analysis:
   stage: analysis
   script:
   - npm run test:coverage
   - npm run plato
-
-build:
-  stage: build
-  script: npm run build
-
-deploy:
-  provider: s3
-  access_key_id: AKIAIG7UVXHXGQMG6JHA
-  secret_access_key: d1S9OwNBIrSn2h4PJjKjR9RfHuBnu96LjsS4Q4DXCmYGMih+FgxfDfBeTxnzwCzAuScFc6j9swTBymIXQBUzgqxn8C8WRYoEYhz/oFalKIaCvs/7X9u87TGjGy3hY9OzE17pwMjnZcvG9tP15eRUcVs9h9n3AXydn4FXQEUgk+yO8W6fbo1UVmQnUU0pP36kS4iNSL55d5MXHvRlQX/keuuspKBfwm0Je5o+v+NNJLvu8VNc1o7nHMJOOJ2+iwQO4uv15gwrhVAg/eoIiFnXr/ZbSGbad3zO3H+nfZXJMLQlE9Bj3olG8E7626L6nMpCb6FFYKvKoBItsFd1iaCeAeTFbqjWGWWpiiwVNUoDCVxtgHEMrosVbJfNhSdeXxnmcUb5TJsmrEkYBgD2fKheg3/ee4CaaCq0Qyo00Sw7n0Sm5MI4e3H5vY1V62i2oElQkKl9833t0lnTI1COFiVM7W1M362EUqu4Uj0uou0Bdlue/BSbyG4vcERO5hJlw1uukkoUjsclgDNp+2cv3qfhotMryTWGUCekB0SgnsalJ5fcnu5rziaES9/hj4g/egl/gO4tbLiWaLXe13nkd5iVRW3kcbG46E+Klm4cK9Auyw9B3TIN36iIK65CCDJhwO1sRYm9kcqV/3dRge+TaVVQD6qjIHyyVUAQZPGPF3DE1uw=
-  stage: deploy
-  bucket: my-keep
-  skip_cleanup: true
-  local_dir: dist
+after_success:
+- npm run build
+- npm run deploy
