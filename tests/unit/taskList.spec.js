@@ -7,7 +7,7 @@ describe('TaskList.vue component', () => {
   let wrapper;
 
   beforeEach(() => {
-    jest.spyOn(axios, 'get');
+    jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve());
     wrapper = mount(TaskList, {
       stubs: {
         TaskItem: true,
@@ -65,14 +65,14 @@ describe('TaskList.vue component', () => {
     });
 
     it('should call axios delete method when removeTask called with correct parameters', () => {
-      jest.spyOn(axios, 'delete');
+      jest.spyOn(axios, 'delete').mockImplementation(() => Promise.resolve());
 
       wrapper.vm.removeTask(mockedTaskObj.id);
       expect(axios.delete).toBeCalledWith(`${BASEURL}/tasks/${mockedTaskObj.id}`);
     });
 
     it('should call axios put method when when completeTask called with correct parameters', () => {
-      jest.spyOn(axios, 'put');
+      jest.spyOn(axios, 'put').mockImplementation(() => Promise.resolve());
       const expected = { id: 1, completed: true, archived: false };
 
       wrapper.vm.tasks = [mockedTaskObj];
@@ -83,12 +83,13 @@ describe('TaskList.vue component', () => {
 
     it(`should not call axios put method when when completeTask 
       called with incorrect id parameter`, () => {
+      jest.spyOn(axios, 'put').mockImplementation(() => Promise.resolve());
       wrapper.vm.completeTask(42);
       expect(axios.put).not.toBeCalled();
     });
 
     it('should call axios put method when when archiveTask called with correct id parameter', () => {
-      jest.spyOn(axios, 'put');
+      jest.spyOn(axios, 'put').mockImplementation(() => Promise.resolve());
       const expected = { id: 1, completed: false, archived: true };
 
       wrapper.vm.tasks = [mockedTaskObj];

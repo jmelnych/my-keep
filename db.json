@@ -5,63 +5,14 @@
       "text": "fsfs",
       "completed": false,
       "archived": true,
-      "id": 9
+      "id": 1
     },
     {
       "title": "new task",
       "text": "to arhive\n",
       "completed": true,
       "archived": true,
-      "id": 12
-    },
-    {
-      "title": "dfsf",
-      "text": "sdfs\nor not\n",
-      "completed": true,
-      "archived": false,
-      "id": 13
-    },
-    {
-      "title": "sfsf",
-      "text": "sfs - been updated again\n\n\n",
-      "completed": true,
-      "archived": false,
-      "id": 14
-    },
-    {
-      "title": "some title",
-      "text": "some text updated\n",
-      "completed": false,
-      "archived": false,
-      "id": 15
-    },
-    {
-      "title": "",
-      "text": "dadad\n",
-      "completed": false,
-      "archived": false,
-      "id": 16
-    },
-    {
-      "title": "some text",
-      "text": "jajfs\n",
-      "completed": false,
-      "archived": false,
-      "id": 17
-    },
-    {
-      "title": "sfs",
-      "text": "sfsf\n",
-      "completed": false,
-      "archived": false,
-      "id": 18
-    },
-    {
-      "title": "1",
-      "text": "1\n",
-      "completed": true,
-      "archived": false,
-      "id": 19
+      "id": 2
     }
   ]
 }

@@ -55,7 +55,7 @@ describe('TaskItemEdit.vue component', () => {
     });
 
     it('Should call axios post method with a certain parameters', () => {
-      jest.spyOn(axios, 'put');
+      jest.spyOn(axios, 'put').mockImplementation(() => Promise.resolve());
 
       wrapper.vm.updateTask();
       expect(axios.put).toBeCalledWith(`${BASEURL}/tasks/${id}`, mockedTaskObj);

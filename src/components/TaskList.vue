@@ -27,6 +27,7 @@ import axios from 'axios';
 import TaskItem from './TaskItem.vue';
 import SideNavigation from './SideNavigation.vue';
 import BASEURL from '../api';
+import db from '../backend/firebase-config';
 
 export default {
   components: { TaskItem, SideNavigation },

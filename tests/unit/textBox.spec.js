@@ -48,7 +48,7 @@ describe('TextBox.vue component', () => {
     });
 
     it('Should call axios post method with a certain parameters', () => {
-      jest.spyOn(axios, 'post');
+      jest.spyOn(axios, 'post').mockImplementation(() => Promise.resolve());
 
       wrapper.vm.addTask();
       expect(axios.post).toBeCalledWith(`${BASEURL}/tasks`, mockedTaskObj);
