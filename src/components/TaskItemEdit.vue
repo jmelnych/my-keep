@@ -23,6 +23,7 @@ export default {
   data() {
     return {
       task: Object,
+      error: null,
     };
   },
   mounted() {
@@ -31,7 +32,8 @@ export default {
       .get(`${BASEURL}/tasks/${id}`)
       .then((res) => {
         this.task = res.data;
-      });
+      })
+      .catch((error) => this.error = error);
   },
   methods: {
     moveNextInputBox() {
@@ -45,7 +47,8 @@ export default {
         axios.put(`${BASEURL}/tasks/${id}`, this.task)
           .then(() => {
             this.$router.push('/');
-          });
+          })
+          .catch((error) => this.error = error);
       }
     },
   },

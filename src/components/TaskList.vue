@@ -4,6 +4,7 @@
                 v-on:filter-tasks="updateFilterQuery"
                 v-bind:filterQuery="filterQuery"
         ></side-navigation>
+        <div  v-if="error" class="error">{{error}}</div>
         <ul class="task-list">
           <task-item class="item"
                      v-for="task in filteredTasks()"
@@ -37,6 +38,7 @@ export default {
     return {
       tasks: [],
       filterQuery: 'todo',
+      error: null,
     };
   },
   mounted() {
@@ -45,7 +47,10 @@ export default {
       .get(`${BASEURL}/tasks`)
       .then((res) => {
         this.tasks = res.data;
-      });
+      })
+      .catch((error) => {
+        this.error = error;
+    });
   },
   methods: {
     updateFilterQuery(filterQuery) {
@@ -64,7 +69,8 @@ export default {
     removeTask(id) {
       axios
         .delete(`${BASEURL}/tasks/${id}`)
-        .then(() => this.tasks = this.tasks.filter(task => task.id !== id));
+        .then(() => this.tasks = this.tasks.filter(task => task.id !== id))
+        .catch((error) => this.error = error);
     },
     completeTask(id) {
       const taskToUpdate = this.tasks.find(task => task.id === id);
@@ -76,7 +82,8 @@ export default {
         .put(`${BASEURL}/tasks/${id}`, taskToUpdate)
         .then((res) => {
           this.tasks = this.tasks.map(task => (task.id === id ? res.data : task));
-        });
+        })
+        .catch((error) => this.error = error);
     },
     archiveTask(id) {
       const taskToUpdate = this.tasks.find(task => task.id === id);
@@ -88,7 +95,8 @@ export default {
         .put(`${BASEURL}/tasks/${id}`, taskToUpdate)
         .then((res) => {
           this.tasks = this.tasks.map(task => (task.id === id ? res.data : task));
-        });
+        })
+        .catch((error) => this.error = error);
     },
   },
 };

@@ -31,4 +31,10 @@ export default {
     margin: 0;
     padding: 0;
   }
+
+  .error {
+    width: 100%;
+    text-align: center;
+    color: red;
+  }
 </style>

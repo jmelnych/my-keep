@@ -25,7 +25,7 @@ export default {
     return {
       newTaskTitle: '',
       newTaskText: '',
-      error: '',
+      error: null,
     };
   },
   methods: {
