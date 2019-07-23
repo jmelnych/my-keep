@@ -16,7 +16,7 @@
 <script>
 
 import axios from 'axios';
-import BASEURL from '../api';
+import api from '../api';
 
 export default {
   name: 'task-edit',
@@ -29,7 +29,7 @@ export default {
   mounted() {
     const { id } = this.$route.params;
     axios
-      .get(`${BASEURL}/tasks/${id}`)
+      .get(`${api.URL}/${id}`, { headers: { 'x-apikey': api.secretKey }})
       .then((res) => {
         this.task = res.data;
       })
@@ -44,7 +44,7 @@ export default {
     updateTask() {
       if (this.task.title.trim() || this.task.text.trim()) {
         const { id } = this.$route.params;
-        axios.put(`${BASEURL}/tasks/${id}`, this.task)
+        axios.put(`${api.URL}/${id}`, this.task, { headers: { 'x-apikey': api.secretKey }})
           .then(() => {
             this.$router.push('/');
           })

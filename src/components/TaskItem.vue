@@ -3,19 +3,19 @@
         <div class="task-item__header">
           <div class="task-item__title"> {{ task.title }} </div>
           <font-awesome-icon icon="check" size="lg" class="task-item__icon"
-                             @click="$emit('complete-task', task.id)"/>
+                             @click="$emit('complete-task', task._id)"/>
         </div>
         <div class="task-item__content">
           <div class="task-item__text"> {{ task.text }} </div>
         </div>
         <div class="task-item__footer">
-          <router-link :to="{ name: 'edit', params: { id: task.id }}">
+          <router-link :to="{ name: 'edit', params: { id: task._id }}">
             <font-awesome-icon icon="pen" class="task-item__icon" />
           </router-link>
           <font-awesome-icon icon="archive" class="task-item__icon"
-                               @click="$emit('archive-task', task.id)"/>
+                               @click="$emit('archive-task', task._id)"/>
           <font-awesome-icon icon="trash" class="task-item__icon"
-                             @click="$emit('remove-task', task.id)"/>
+                             @click="$emit('remove-task', task._id)"/>
 
         </div>
   </li>

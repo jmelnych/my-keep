@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import TaskItemEdit from '@/components/TaskItemEdit.vue';
 import axios from 'axios';
-import BASEURL from '@/api';
+import api from '@/api';
 
 describe('TaskItemEdit.vue component', () => {
   let wrapper;
@@ -58,7 +58,7 @@ describe('TaskItemEdit.vue component', () => {
       jest.spyOn(axios, 'put').mockImplementation(() => Promise.resolve());
 
       wrapper.vm.updateTask();
-      expect(axios.put).toBeCalledWith(`${BASEURL}/tasks/${id}`, mockedTaskObj);
+      expect(axios.put).toBeCalledWith(`${api.URL}/${id}`, mockedTaskObj, { headers: { 'x-apikey': api.secretKey }});
     });
   });
 });

@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import TextBox from '@/components/TextBox.vue';
 import axios from 'axios';
-import BASEURL from '@/api';
+import api from '@/api';
 
 
 describe('TextBox.vue component', () => {
@@ -51,7 +51,7 @@ describe('TextBox.vue component', () => {
       jest.spyOn(axios, 'post').mockImplementation(() => Promise.resolve());
 
       wrapper.vm.addTask();
-      expect(axios.post).toBeCalledWith(`${BASEURL}/tasks`, mockedTaskObj);
+      expect(axios.post).toBeCalledWith(`${api.URL}`, mockedTaskObj, { headers: { 'x-apikey': api.secretKey } });
     });
 
     it('Should emit event with correct parameters', (done) => {

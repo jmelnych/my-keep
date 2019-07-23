@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import TaskList from '@/components/TaskList.vue';
 import axios from 'axios';
-import BASEURL from '@/api';
+import api from '@/api';
 
 describe('TaskList.vue component', () => {
   let wrapper;
@@ -50,7 +50,7 @@ describe('TaskList.vue component', () => {
     let mockedTaskObj;
     beforeEach(() => {
       mockedTaskObj = {
-        id: 1,
+        _id: 1,
         completed: false,
         archived: false,
       };
@@ -61,24 +61,25 @@ describe('TaskList.vue component', () => {
     });
 
     it('should call axios get method on component mount', () => {
-      expect(axios.get).toBeCalledWith(`${BASEURL}/tasks`);
+      expect(axios.get).toBeCalledWith(`${api.URL}`, { headers: { 'x-apikey': api.secretKey } });
     });
 
     it('should call axios delete method when removeTask called with correct parameters', () => {
       jest.spyOn(axios, 'delete').mockImplementation(() => Promise.resolve());
 
       wrapper.vm.removeTask(mockedTaskObj.id);
-      expect(axios.delete).toBeCalledWith(`${BASEURL}/tasks/${mockedTaskObj.id}`);
+      expect(axios.delete).toBeCalledWith(`${api.URL}/${mockedTaskObj.id}`, { headers: { 'x-apikey': api.secretKey } });
     });
 
     it('should call axios put method when when completeTask called with correct parameters', () => {
       jest.spyOn(axios, 'put').mockImplementation(() => Promise.resolve());
-      const expected = { id: 1, completed: true, archived: false };
+      const expected = { _id: 1, completed: true, archived: false };
 
       wrapper.vm.tasks = [mockedTaskObj];
-      wrapper.vm.completeTask(mockedTaskObj.id);
+      wrapper.vm.completeTask(mockedTaskObj._id);
 
-      expect(axios.put).toBeCalledWith(`${BASEURL}/tasks/${mockedTaskObj.id}`, expected);
+      expect(axios.put).toBeCalledWith(`${api.URL}/${mockedTaskObj._id}`, expected,
+        { headers: { 'x-apikey': api.secretKey } });
     });
 
     it(`should not call axios put method when when completeTask 
@@ -90,11 +91,12 @@ describe('TaskList.vue component', () => {
 
     it('should call axios put method when when archiveTask called with correct id parameter', () => {
       jest.spyOn(axios, 'put').mockImplementation(() => Promise.resolve());
-      const expected = { id: 1, completed: false, archived: true };
+      const expected = { _id: 1, completed: false, archived: true };
 
       wrapper.vm.tasks = [mockedTaskObj];
-      wrapper.vm.archiveTask(mockedTaskObj.id);
-      expect(axios.put).toBeCalledWith(`${BASEURL}/tasks/${mockedTaskObj.id}`, expected);
+      wrapper.vm.archiveTask(mockedTaskObj._id);
+      expect(axios.put).toBeCalledWith(`${api.URL}/${mockedTaskObj._id}`, expected,
+        { headers: { 'x-apikey': api.secretKey } });
     });
 
     describe('should render different filtered tasks based on filterQuery', () => {

@@ -17,7 +17,7 @@
 
 <script>
 import axios from 'axios';
-import BASEURL from '../api';
+import api from '../api';
 
 export default {
   name: 'text-box',
@@ -43,7 +43,11 @@ export default {
           archived: false,
         };
         axios
-          .post(`${BASEURL}/tasks`, newTaskObj)
+          .post(`${api.URL}`, newTaskObj, {
+            headers: {
+              'x-apikey': api.secretKey
+            }
+          })
           .then((res) => {
             this.$root.$emit('addTaskEvent', res.data);
           })

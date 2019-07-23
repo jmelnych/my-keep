@@ -4,14 +4,14 @@
       "title": "blah",
       "text": "fsfs",
       "completed": false,
-      "archived": true,
+      "archived": false,
       "id": 1
     },
     {
       "title": "new task",
       "text": "to arhive\n",
       "completed": true,
-      "archived": true,
+      "archived": false,
       "id": 2
     }
   ]
