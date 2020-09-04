@@ -40,7 +40,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "vue-cli-plugin-s3-deploy": "^3.0.0",
     "husky": "^2.4.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "plato": "^1.7.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
